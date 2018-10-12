@@ -19,7 +19,6 @@ const showDate = ()=>{
   }else if (d == 6){
     weekDay = 'Saturday';
   }//end of if-else if
-  let x;
   const addZero=(x)=>{
     if (x < 10) {
     x = "0" + x;
