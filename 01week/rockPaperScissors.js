@@ -7,10 +7,50 @@ const rl = readline.createInterface({
   output: process.stdout
 });
 
+//user1 enters r,p, or s
+//user2 enters r,p, or s
+
+//check if user1 enters rock, paper, or scissors
+//check if user2 enters rock, paper, or scissors
+
+//check to see if user1 = user2
+
+//if user1 is rock- if user2 chooses paper, user2 wins! paper covers rock! if user2 chooses scissors, user1 wins! rock breaks scissors
+//if user1 is paper- if user2 chooses rock, user1 wins! paper covers rock! if user2 chooses scissors, user2 wins! scissors cuts paper
+//if user1 is scissors- if user2 chooses rock, user2 wins! rock breaks scissors! if user2 chooses paper, user1 wins! scissors cuts paper
+
+
+
 
 function rockPaperScissors(hand1, hand2) {
-
-  // Write code here
+  const p1 = 'Player One wins!';
+  const p2 = 'Player Two wins!';
+  const rock = ' Rock breaks scissors!';
+  const paper = ' Paper covers rock!';
+  const scissors = ' Scissors cut paper!';
+  const p1bad = (hand1 != 'rock' && hand1 != 'paper' && hand1 != 'scissors');
+  const p2bad = (hand2 !== 'rock' && hand2 !== 'paper' && hand2 !== 'scissors');
+  if(p1bad && p2bad){
+    return "Do either of you want to play or not?"
+  }else if(p1bad){
+    return 'Player 1, pull your head out of your ass.'
+  }else if(p2bad){
+    return 'Player 2, COME ON!'
+  }else if (hand1 === hand2){
+    return 'Tie!';
+  }else if (hand1==='rock'){
+    if(hand2==='paper'){
+      return p2 + paper;
+    }else return p1 + rock;
+  }else if(hand1==='paper'){
+    if(hand2==='scissors'){
+      return p2 + scissors;
+    }else return p1 + paper;
+  }else if(hand1==='scissors'){
+    if (hand2==='rock'){
+      return p2 + rock;
+    }else return p1 + scissors;
+  } 
 
 }
 
