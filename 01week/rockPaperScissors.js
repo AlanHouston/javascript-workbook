@@ -28,14 +28,14 @@ function rockPaperScissors(hand1, hand2) {
   const rock = ' Rock breaks scissors!';
   const paper = ' Paper covers rock!';
   const scissors = ' Scissors cut paper!';
-  const p1bad = (hand1 != 'rock' && hand1 != 'paper' && hand1 != 'scissors');
-  const p2bad = (hand2 !== 'rock' && hand2 !== 'paper' && hand2 !== 'scissors');
+  const p1bad = hand1 != 'rock' && hand1 != 'paper' && hand1 != 'scissors';
+  const p2bad = hand2 != 'rock' && hand2 != 'paper' && hand2 != 'scissors';
   if(p1bad && p2bad){
     return "Do either of you want to play or not?"
   }else if(p1bad){
-    return 'Player 1, pull your head out of your ass.'
+    return 'Player 1, please enter rock, paper, or scissors.'
   }else if(p2bad){
-    return 'Player 2, COME ON!'
+    return 'Player 2, please enter rock, paper, or scissors.'
   }else if (hand1 === hand2){
     return 'Tie!';
   }else if (hand1==='rock'){
