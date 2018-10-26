@@ -83,6 +83,9 @@ if (typeof describe === 'function') {
       assert.equal(rockPaperScissors('Paper', 'SCISSORS'), "Hand two wins!");
       assert.equal(rockPaperScissors('rock ', 'sCiSsOrs'), "Hand one wins!");
     });
+    it('should detect if input is rock, paper, or scissors', () => {
+      assert.equal(rockPaperScissors('toyota', 'banana'), "!");
+    });
   });
 } else {
 
