@@ -2,7 +2,7 @@
 
 const printListofOlympians = (arr) =>{
     arr.forEach(element => {
-        console.log(element)
+        console.log(element);
     });
 }
 
