@@ -6,4 +6,5 @@ const printListofOlympians = (arr) =>{
     });
 }
 
+
 printListofOlympians('Charlie','Mac','Dennis','Dee','Frank');
