@@ -20,7 +20,7 @@ function rockPaperScissors(hand1, hand2) {
     const p1bad = (hand1 != 'rock' && hand1 != 'paper' && hand1 != 'scissors');
     const p2bad = (hand2 !== 'rock' && hand2 !== 'paper' && hand2 !== 'scissors');
     if(p1bad && p2bad){
-        return "Do either of you want to play or not?"
+        return 'Do either of you want to play or not?'
     }else if(p1bad){
         return 'Player 1, enter rock, paper, or scissors'
     }else if(p2bad){
@@ -69,13 +69,15 @@ if (typeof describe === 'function') {
       assert.equal(rockPaperScissors('scissors', 'paper'), "Hand one wins!");
       assert.equal(rockPaperScissors('scissors', 'rock'), "Hand two wins!");
     });
-    it('should scrub input to ensure lowercase with "trim"ed whitepace', () => {
+    it('should scrub input to ensure lowercase with "trim"ed whitespace', () => {
       assert.equal(rockPaperScissors('rOcK', ' paper '), "Hand two wins!");
       assert.equal(rockPaperScissors('Paper', 'SCISSORS'), "Hand two wins!");
       assert.equal(rockPaperScissors('rock ', 'sCiSsOrs'), "Hand one wins!");
     });
-    it('', () => {
-        assert.equal(rockPaperScissors('rOcK', ' paper '), "Hand two wins!");
+    it('should not allow inputs other than rock, paper, or scissors', () => {
+        assert.equal(rockPaperScissors('Subaru', 'banana'), "Do either of you want to play or not?");
+        assert.equal(rockPaperScissors('omglol', 'rock'), "Player 1, enter rock, paper, or scissors");
+        assert.equal(rockPaperScissors('paper', 'OprahWinfrey'), "Player 2, enter rock, paper, or scissors");
     });
   });
 } else {
