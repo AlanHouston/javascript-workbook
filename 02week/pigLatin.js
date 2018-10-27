@@ -13,16 +13,16 @@ const rl = readline.createInterface({
 //.join() to bring back to string
 
 const vowel = ['a','e','i','o','u'];
-const isString = (word) => {
-  return typeof(word)=='string';
+const isString = (formattedWord) => {
+  return typeof(formattedWord)=='string';
 }
 
-const hasOnlyLetters=(word)=>{
+const hasOnlyLetters=(formattedWord)=>{
   const letter = ' abcdefghijklmnopqrstuvwxyz';
-  for(let n=0;n<word.length;n++){
+  for(let n=0;n<formattedWord.length;n++){
     let isLetter = false;
     for(let m=0;m<letter.length;m++){
-      if(word[n]==letter[m]){
+      if(formattedWord[n]==letter[m]){
       isLetter=1;
       }
     }
@@ -33,40 +33,38 @@ const hasOnlyLetters=(word)=>{
   return true;
 }
 
-const findFirstVowel=(word)=>{
-  for(let y=1;y<word.length;y++){
+const findFirstVowel=(splitWord)=>{
+  for(let y=1;y<splitWord.length;y++){
     for(let x=0;x<vowel.length;x++){
-      if(word[y] == vowel[x]){
+      if(splitWord[y] == vowel[x]){
         return y
       }
     }
   }
 }
 
-const firstLetterVowel = (word) => {
+const firstLetterVowel = (splitWord) => {
   for(let x=0;x<vowel.length;x++){
-    if(word[0] == vowel[x]){
+    if(splitWord[0] == vowel[x]){
       return true
     }
   }
 }
 
 const pigLatin = (word)=> {
-  word = word.trim().toLowerCase();
-  const theFirstVowel = findFirstVowel(word);
-  if(isString(word) && hasOnlyLetters(word)){
-    word = word.split('');
-    if(firstLetterVowel(word)){
-      return word.join('')+ 'yay'
+  const formattedWord = word.trim().toLowerCase();
+  const theFirstVowel = findFirstVowel(formattedWord);
+  if(isString(formattedWord) && hasOnlyLetters(formattedWord)){
+    const splitWord = formattedWord.split('');
+    if(firstLetterVowel(splitWord)){
+      return splitWord.join('')+ 'yay'
     }else if (theFirstVowel){
-      const middle = word.slice(0,theFirstVowel).join('');
-      const beginning = word.slice(theFirstVowel).join('');
+      const middle = splitWord.slice(0,theFirstVowel).join('');
+      const beginning = splitWord.slice(theFirstVowel).join('');
       return beginning + middle + 'ay'
     }
   }else return 'Please enter words with letters!'
 }
-
-pigLatin('hello')
 
 
 function getPrompt() {
