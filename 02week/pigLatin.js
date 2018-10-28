@@ -18,20 +18,33 @@ const isString = (formattedWord) => {
 }
 
 const hasOnlyLetters=(formattedWord)=>{
-  const letter = ' abcdefghijklmnopqrstuvwxyz';
-  for(let n=0;n<formattedWord.length;n++){
-    let isLetter = false;
-    for(let m=0;m<letter.length;m++){
-      if(formattedWord[n]==letter[m]){
-      isLetter=1;
-      }
+  let isLetter = false;
+  for(let m=0;m<formattedWord.length;m++){
+    if (m >= "a" && m <= "z"){
+      console.log('trying');
+      isLetter = true;
     }
-      if(isLetter==false){
-        return false;
-      }
   }
-  return true;
+  return isLetter;
 }
+  
+  
+
+
+  // const letter = ' abcdefghijklmnopqrstuvwxyz';
+  // for(let n=0;n<formattedWord.length;n++){
+  //   let isLetter = false;
+  //   for(let m=0;m<letter.length;m++){
+  //     if(formattedWord[n]==letter[m]){
+  //     isLetter=1;
+  //     }
+  //   }
+  //     if(isLetter==false){
+  //       return false;
+  //     }
+  // }
+  // return true;
+
 
 const findFirstVowel=(splitWord)=>{
   for(let y=1;y<splitWord.length;y++){
