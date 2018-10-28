@@ -7,12 +7,14 @@ const rl = readline.createInterface({
   output: process.stdout
 });
 
+//check if inputs are valid - isValidInput()
 //grab one piece from the end each time - movePiece(), use pop()
-//check if move is legal, ie empty stack or last piece is bigger - isLegal()
+//check if move is legal, ie empty stack or last piece is bigger - isMoveLegal()
 //if isLegal, push()
 //checkforwin() - when stacks.c = [4,3,2,1] - you win a cookie!
 //resetStack() - stacks.a = [4,3,2,1]
 
+let piece;
 let stacks = {
   a: [4, 3, 2, 1],
   b: [],
@@ -27,21 +29,29 @@ function printStacks() {
   console.log("c: " + stacks.c);
 }
 
-const movePiece = (startStack,endStack)=> {
-  let piece = stacks.startStack.pop();
-  stacks.endStack.push(piece);
+//isValidInput takes formatStartStack and formatEndStack to test for a, b, or c
+const isValidInput = (x) =>{
+  const acceptableInputs = ['a','b','c'];
+  return acceptableInputs.includes(x);
 }
 
-const isLegal = (piece)=> {
-  let lastPiece = stacks.endStack.length-1;
-  if(stacks.endStack == [] || stacks.endStack.lastPiece<piece) {
-    stacks.endStack.push(piece);
-  }
+const movePiece = (formatStartStack,formatEndStack)=> {
+  piece = stacks[formatStartStack].pop();
+  stacks[formatEndStack].push(piece);
+  console.log('piece = ' + piece);
+}
+
+// || stacks[formatEndStack][lastPiece] < piece
+
+const isMoveLegal = (formatStartStack,formatEndStack)=> {
+  // const lastPiecePosition = stacks[formatEndStack].length-1;
+  // const lastPieceValue = stacks.formatEndStack.lastPiecePosition;
+  console.log(stacks.endStack);
+
 }
 
 const checkForWin = ()=> {
   return stacks.c = [4,3,2,1];
-
 }
 
 const resetStack = ()=> {
@@ -52,7 +62,21 @@ const resetStack = ()=> {
   };
 }
 
-function towersOfHanoi(startStack, endStack) {
+const towersOfHanoi = (startStack,endStack)=> {
+  const formatStartStack = startStack.trim().toLowerCase();
+  const formatEndStack = endStack.trim().toLowerCase();
+  if(isValidInput(formatStartStack) && isValidInput(formatEndStack)){
+    // console.log('it sure is valid');
+    if(isMoveLegal(formatEndStack)){
+      console.log('it sure is legal');
+      stacks.formatEndStack.push(piece);
+      movePiece();
+      if(checkForWin()){
+        console.log('holy shit you did it!');
+        resetStack();
+      }
+    }
+  }else console.log('First entry should be a,b, or c!')
   
 
 }
