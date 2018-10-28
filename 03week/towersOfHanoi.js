@@ -44,10 +44,13 @@ const movePiece = (formatStartStack,formatEndStack)=> {
 // || stacks[formatEndStack][lastPiece] < piece
 
 const isMoveLegal = (formatStartStack,formatEndStack)=> {
-  // const lastPiecePosition = stacks[formatEndStack].length-1;
-  // const lastPieceValue = stacks.formatEndStack.lastPiecePosition;
-  console.log(stacks.endStack);
-
+  const lastPiecePosition = stacks[formatEndStack].length-1;
+  const lastPieceValue = stacks[formatEndStack][lastPiecePosition];
+  if(stacks[formatEndStack] == []){
+    return true;
+  }else if(stacks[formatStartStack] > lastPieceValue){
+    return true;
+  }else return false;
 }
 
 const checkForWin = ()=> {
@@ -66,19 +69,15 @@ const towersOfHanoi = (startStack,endStack)=> {
   const formatStartStack = startStack.trim().toLowerCase();
   const formatEndStack = endStack.trim().toLowerCase();
   if(isValidInput(formatStartStack) && isValidInput(formatEndStack)){
-    // console.log('it sure is valid');
-    if(isMoveLegal(formatEndStack)){
+    if(isMoveLegal(formatStartStack,formatEndStack)){
       console.log('it sure is legal');
-      stacks.formatEndStack.push(piece);
-      movePiece();
-      if(checkForWin()){
-        console.log('holy shit you did it!');
-        resetStack();
-      }
+      // movePiece();
+      // if(checkForWin()){
+      //   console.log('holy shit you did it!');
+      //   resetStack();
+      // }
     }
   }else console.log('First entry should be a,b, or c!')
-  
-
 }
 
 function getPrompt() {
