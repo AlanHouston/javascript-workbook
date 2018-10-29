@@ -7,21 +7,17 @@ const rl = readline.createInterface({
   output: process.stdout
 });
 
-//check if inputs are valid - isValidInput()
-//grab one piece from the end each time - movePiece(), use pop()
-//check if move is legal, ie empty stack or last piece is bigger - isMoveLegal()
-//if isLegal, push()
-//checkforwin() - when stacks.c = [4,3,2,1] - you win a cookie!
-//resetStack() - stacks.a = [4,3,2,1]
+//check if inputs are valid, must equal 'a', 'b', or 'c' - isValidInput()
+//check if move is legal, ie empty/undefined stack or last piece value is greater than moving piece value - isMoveLegal()
+//if both of those ^^ are true, pop() from startStack, push() to endstack - movePiece()
+//check to see if values in stacks.c match [4,3,2,1] - checkForWin() 
+//if win, congratulate, demand player play another game, then return stacks to original starting position - resetStack() 
 
-let piece;
 let stacks = {
   a: [4, 3, 2, 1],
   b: [],
   c: []
 };
-
-console.log(stacks.c)
 
 function printStacks() {
   console.log("a: " + stacks.a);
@@ -35,25 +31,17 @@ const isValidInput = (x) =>{
   return acceptableInputs.includes(x);
 }
 
-// || stacks[formatEndStack][lastPiece] < piece
-
 const isMoveLegal = (formatStartStack,formatEndStack)=> {
-  let booleanMoveLegal = false;
   const lastPiecePosition = stacks[formatEndStack].length-1;
   const lastPieceValue = stacks[formatEndStack][lastPiecePosition];
   const movingPiecePosition = stacks[formatStartStack].length-1;
   const movingPieceValue = stacks[formatStartStack][movingPiecePosition];
-  if(lastPieceValue == undefined){
-    booleanMoveLegal = true;
-  }else if(movingPieceValue < lastPieceValue){
-    booleanMoveLegal = true;
-  }else {console.log('enter a valid move')}
-  return booleanMoveLegal;
+  return lastPieceValue == undefined || movingPieceValue < lastPieceValue;
 }
 
 const movePiece = (formatStartStack,formatEndStack)=> {
   const movingPiecePosition = stacks[formatStartStack].length-1;
-  piece = stacks[formatStartStack].pop(movingPiecePosition);
+  const piece = stacks[formatStartStack].pop(movingPiecePosition);
   stacks[formatEndStack].push(piece);
 }
 
@@ -76,10 +64,10 @@ const towersOfHanoi = (startStack,endStack)=> {
     if(isMoveLegal(formatStartStack,formatEndStack)){
       movePiece(formatStartStack,formatEndStack);
       if(checkForWin()){
-        console.log('holy shit you did it!');
+        console.log('Congratulations you win! Play again now.');
         resetStack();
       }
-    }
+    }else console.log('Illegal move!')
   }else console.log('First entry should be a, b, or c!')
 }
 
@@ -104,14 +92,15 @@ if (typeof describe === 'function') {
     });
   });
 
-  describe('#isLegal()', () => {
+  //changed isLegal() to isMoveLegal()
+  describe('#isMoveLegal()', () => {
     it('should not allow an illegal move', () => {
       stacks = {
         a: [4, 3, 2],
         b: [1],
         c: []
       };
-      assert.equal(isLegal('a', 'b'), false);
+      assert.equal(isMoveLegal('a', 'b'), false);
     });
     it('should allow a legal move', () => {
       stacks = {
@@ -119,12 +108,12 @@ if (typeof describe === 'function') {
         b: [],
         c: []
       };
-      assert.equal(isLegal('a', 'c'), true);
+      assert.equal(isMoveLegal('a', 'c'), true);
     });
   });
   describe('#checkForWin()', () => {
     it('should detect a win', () => {
-      stacks = { a: [], b: [4, 3, 2, 1], c: [] };
+      stacks = { a: [], b: [], c: [4, 3, 2, 1] };//changed win array to 'c'
       assert.equal(checkForWin(), true);
       stacks = { a: [1], b: [4, 3, 2], c: [] };
       assert.equal(checkForWin(), false);
