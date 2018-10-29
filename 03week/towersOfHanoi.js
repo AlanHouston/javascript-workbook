@@ -35,22 +35,28 @@ const isValidInput = (x) =>{
   return acceptableInputs.includes(x);
 }
 
+// || stacks[formatEndStack][lastPiece] < piece
+
+const isMoveLegal = (formatStartStack,formatEndStack)=> {
+  let booleanMoveLegal = false;
+  const lastPiecePosition = stacks[formatEndStack].length-1;
+  const lastPieceValue = stacks[formatEndStack][lastPiecePosition];
+  const movingPiecePosition = stacks[formatStartStack].length-1;
+  const movingPieceValue = stacks[formatStartStack][movingPiecePosition];
+  if(!stacks[formatEndStack].hasOwnProperty()){
+    booleanMoveLegal = true;
+    console.log('first one is true')
+  }else if(movingPieceValue > lastPieceValue){
+    booleanMoveLegal = true;
+    console.log('second one is true')
+  }else {console.log('not happening')}
+  return booleanMoveLegal;
+}
+
 const movePiece = (formatStartStack,formatEndStack)=> {
   piece = stacks[formatStartStack].pop();
   stacks[formatEndStack].push(piece);
   console.log('piece = ' + piece);
-}
-
-// || stacks[formatEndStack][lastPiece] < piece
-
-const isMoveLegal = (formatStartStack,formatEndStack)=> {
-  const lastPiecePosition = stacks[formatEndStack].length-1;
-  const lastPieceValue = stacks[formatEndStack][lastPiecePosition];
-  if(stacks[formatEndStack] == []){
-    return true;
-  }else if(stacks[formatStartStack] > lastPieceValue){
-    return true;
-  }else return false;
 }
 
 const checkForWin = ()=> {
@@ -71,6 +77,7 @@ const towersOfHanoi = (startStack,endStack)=> {
   if(isValidInput(formatStartStack) && isValidInput(formatEndStack)){
     if(isMoveLegal(formatStartStack,formatEndStack)){
       console.log('it sure is legal');
+      console.log(stacks[formatStartStack])
       // movePiece();
       // if(checkForWin()){
       //   console.log('holy shit you did it!');
