@@ -43,13 +43,11 @@ const isMoveLegal = (formatStartStack,formatEndStack)=> {
   const lastPieceValue = stacks[formatEndStack][lastPiecePosition];
   const movingPiecePosition = stacks[formatStartStack].length-1;
   const movingPieceValue = stacks[formatStartStack][movingPiecePosition];
-  if(!stacks[formatEndStack].hasOwnProperty()){
+  if(lastPieceValue == undefined){ //!stacks[formatEndStack].hasOwnProperty([])
     booleanMoveLegal = true;
-    console.log('first one is true')
-  }else if(movingPieceValue > lastPieceValue){
+  }else if(movingPieceValue < lastPieceValue){
     booleanMoveLegal = true;
-    console.log('second one is true')
-  }else {console.log('not happening')}
+  }else {console.log('enter a valid move')}
   return booleanMoveLegal;
 }
 
@@ -60,7 +58,7 @@ const movePiece = (formatStartStack,formatEndStack)=> {
 }
 
 const checkForWin = ()=> {
-  return stacks.c = [4,3,2,1];
+  return stacks.c[0] == 4 && stacks.c[1] == 3 && stacks.c[2] == 2 && stacks.c[3] == 1;
 }
 
 const resetStack = ()=> {
@@ -77,12 +75,12 @@ const towersOfHanoi = (startStack,endStack)=> {
   if(isValidInput(formatStartStack) && isValidInput(formatEndStack)){
     if(isMoveLegal(formatStartStack,formatEndStack)){
       movePiece(formatStartStack,formatEndStack);
-      // if(checkForWin()){
-      //   console.log('holy shit you did it!');
-      //   resetStack();
-      // }
+      if(checkForWin()){
+        console.log('holy shit you did it!');
+        resetStack();
+      }
     }
-  }else console.log('First entry should be a,b, or c!')
+  }else console.log('First entry should be a, b, or c!')
 }
 
 function getPrompt() {
