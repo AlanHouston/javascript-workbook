@@ -43,7 +43,7 @@ const isMoveLegal = (formatStartStack,formatEndStack)=> {
   const lastPieceValue = stacks[formatEndStack][lastPiecePosition];
   const movingPiecePosition = stacks[formatStartStack].length-1;
   const movingPieceValue = stacks[formatStartStack][movingPiecePosition];
-  if(lastPieceValue == undefined){ //!stacks[formatEndStack].hasOwnProperty([])
+  if(lastPieceValue == undefined){
     booleanMoveLegal = true;
   }else if(movingPieceValue < lastPieceValue){
     booleanMoveLegal = true;
