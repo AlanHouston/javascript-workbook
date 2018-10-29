@@ -54,9 +54,9 @@ const isMoveLegal = (formatStartStack,formatEndStack)=> {
 }
 
 const movePiece = (formatStartStack,formatEndStack)=> {
-  piece = stacks[formatStartStack].pop();
+  const movingPiecePosition = stacks[formatStartStack].length-1;
+  piece = stacks[formatStartStack].pop(movingPiecePosition);
   stacks[formatEndStack].push(piece);
-  console.log('piece = ' + piece);
 }
 
 const checkForWin = ()=> {
@@ -76,9 +76,7 @@ const towersOfHanoi = (startStack,endStack)=> {
   const formatEndStack = endStack.trim().toLowerCase();
   if(isValidInput(formatStartStack) && isValidInput(formatEndStack)){
     if(isMoveLegal(formatStartStack,formatEndStack)){
-      console.log('it sure is legal');
-      console.log(stacks[formatStartStack])
-      // movePiece();
+      movePiece(formatStartStack,formatEndStack);
       // if(checkForWin()){
       //   console.log('holy shit you did it!');
       //   resetStack();
