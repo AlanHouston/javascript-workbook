@@ -91,6 +91,7 @@ if (typeof describe === 'function') {
       assert.deepEqual(stacks, { a: [4, 3, 2], b: [1], c: [] });
     });
   });
+  
 
   //changed isLegal() to isMoveLegal()
   describe('#isMoveLegal()', () => {
@@ -119,7 +120,28 @@ if (typeof describe === 'function') {
       assert.equal(checkForWin(), false);
     });
   });
-
+  describe('#isValidInput()', () => {
+    it('should not allow an invalid input', () => {
+      stacks = {
+        a: [4, 3, 2, 1],
+        b: [],
+        c: []
+      };
+      assert.equal(isValidInput('f', 'x'), false);
+    });
+  });
+  describe('#resetStack()', () => {
+    it('should reset after a win', () => {
+      stacks = {
+        a: [],
+        b: [],
+        c: [4, 3, 2, 1]
+      };
+      assert.equal(resetStack(), undefined);//not sure why this comes out undefined
+    });
+  });
+  
+  
 } else {
 
   getPrompt();
