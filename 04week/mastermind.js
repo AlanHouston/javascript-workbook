@@ -29,13 +29,46 @@ function getRandomInt(min, max) {
 }
 
 function generateHint() {
-  // your code here
+  //loop through splitGuess array - for each letter, check for corresponding letter in solution array
+  //if the corresponding letter is the same, right letter & right place
+  //else, if letter in solotion arrayis right letter, wrong place
+  const guessArr = guess.split(' ');
+  const solutionArr = solution.split(' ');
+  let rightLetterRightPlace = 0;
+  let rightLetterWrongPlace = 0;
+  guessArr.foreach((letter, index)=>{
+    console.log(letter, 'current', index);
+    const correspondingLetter = solutionArr[index];
+    if(letter == correspondingLetter){
+      //add to right letter, right place
+      rightLetterRightPlace++;
+    }else if(solutionArr.includes(letter)){
+      //add to right letter, wrong place
+      rightLetterWrongPlace++;
+    }
+  });
+  console.log(guessArr,solutionArr);
+  return `${rightLetterRightPlace}-${rightLetterWrongPlace}`;
 }
 
 function mastermind(guess) {
   solution = 'abcd'; 
-  guess.toLowerCase().trim();
-  else
+  formattedGuess = guess.trim().toLowerCase();
+  if(isInputValid){
+    board.push(guess)
+    if(checkForWin(guess)){
+      console.log(solution + 'you win!');
+      resetBoard();
+    }else {
+      if(hasGuessesRemaining() / guessesRemaining()){
+        generateHint();
+      }else {
+        console.log('you lose!' + solution);
+        resetBoard();
+      }
+    }
+  }else console.log('enter four letters between a and h!!!');
+
 }
 
 
