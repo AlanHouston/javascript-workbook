@@ -1,5 +1,17 @@
 'use strict';
 
+//player 1 selects tile
+//check to see if location on board is available = isValidPick()
+//check to see if input is an actual location on board = isEntryValid()
+//check for win = checkForwin()
+  //if win, display winner, then resetBoard(), make all values = ' '
+  //if not win, checkForDraw() - see if every space is filled
+    //if draw, resetBoard()
+//if no win, switchPlayers() 
+
+
+
+
 const assert = require('assert');
 const readline = require('readline');
 const rl = readline.createInterface({
@@ -13,6 +25,7 @@ let board = [
 ];
 
 let playerTurn = 'X';
+let isItAWinner = false;
 
 function printBoard() {
   console.log('   0  1  2');
@@ -23,24 +36,86 @@ function printBoard() {
   console.log('2 ' + board[2].join(' | '));
 }
 
-function horizontalWin() {
-  // Your code here
+const isValidPick = (row,column) =>{
+  return board[row][column] == ' ';
 }
 
-function verticalWin() {
-  // Your code here
+const isEntryValid = (row,column) =>{
+  return row >= 0 && row <= 2 && column >= 0 && column <= 2;
 }
 
-function diagonalWin() {
-  // Your code here
+const switchPlayers = () =>{
+  if (playerTurn == 'X'){
+    playerTurn = 'O'
+  }else{
+    playerTurn = 'X';
+  }
 }
 
-function checkForWin() {
-  // Your code here
+//try array.every() for horiz win once get working properly
+const horizontalWin = () => {
+  for(let x=0;x<3;x++){
+    if(board[x][0] == board[x][1] && board[x][1] == board[x][2] && board[x][1] != ' '){
+      isItAWinner = true;
+      console.log('horiz win')
+    }
+  }
+  return isItAWinner;
 }
 
-function ticTacToe(row, column) {
-  // Your code here
+const verticalWin = () => {
+  for(let y=0;y<3;y++){
+    if(board[0][y] == board[1][y] && board[1][y] == board[2][y] && board[1][y] != ' '){
+      isItAWinner = true;
+      console.log('vert win')
+    }
+  }
+  return isItAWinner;
+}
+
+const diagonalWin = () => {
+  if(board[0][0] == board[1][1] && board[1][1] == board[2][2] && board[1][1] != ' ' || board[0][2] == board[1][1] && board[1][1] == board[2][0] && board[1][1] != ' '){
+    isItAWinner = true;
+    console.log('diag win');
+  }
+  return isItAWinner;
+}
+
+const checkForWin = () => {
+  return horizontalWin() || verticalWin() || diagonalWin()
+}
+
+const checkForDraw = ()=>{
+  return board.every((boardArray)=>{
+    return boardArray.every((IndividualArray)=>{
+      return IndividualArray != ' ';
+    });
+  });
+}
+
+const resetBoard = () =>{
+  board.forEach((x,index) => {
+    board[index].fill(' ');
+  });
+  //when running through the foreach, and not using the element value, still need to put in a placeholder, x, in order to access the index, right?
+  playerTurn = 'X';
+  console.log("C'mon! Let's play again!");
+}
+
+const ticTacToe = (row,column) => {
+  if (isEntryValid(row,column) && isValidPick(row,column)){
+    board[row][column] = playerTurn;
+    if(checkForWin()){
+      console.log(playerTurn + ' wins!');
+      isItAWinner = false;
+      resetBoard();
+    }else if(checkForDraw()){
+      console.log("It's a draw!")
+      resetBoard();
+    }else {
+      switchPlayers();
+    }
+  }else console.log('pick a number between 0 and 2!!')
 }
 
 function getPrompt() {
@@ -55,7 +130,12 @@ function getPrompt() {
 
 }
 
-
+// const resetBoard = () =>{
+//   playerTurn = 'X';
+//   for(z=0;z<board.length-1;z++){
+//     board[i].fill(' ');
+//   }
+// }
 
 // Tests
 
