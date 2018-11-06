@@ -86,9 +86,9 @@ const checkForWin = () => {
 }
 
 const checkForDraw = ()=>{
-  return !board.every((boardArray)=>{
+  return board.every((boardArray)=>{
     return boardArray.every((IndividualArray)=>{
-      return IndividualArray == ' ';
+      return IndividualArray != ' ';
     });
   });
 }
@@ -109,7 +109,7 @@ const ticTacToe = (row,column) => {
       console.log(playerTurn + ' wins!');
       isItAWinner = false;
       resetBoard();
-    }else if(checkForDraw){
+    }else if(checkForDraw()){
       console.log("It's a draw!")
       resetBoard();
     }else {
