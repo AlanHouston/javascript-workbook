@@ -67,6 +67,7 @@ while(num < 1001);
 // When you want to iterate over something to evaluate a boolean condition within the loop, rather than have a continual loop until the condition is not met
 
 // How is the readability of the code affected?
+// while seem more readable to me!
 
 // What is the difference between a for loop and a for...in loop?
 //for loop should be used for array, for in used for object
