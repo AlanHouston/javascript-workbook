@@ -14,7 +14,11 @@ class CrewMember {
     this.name = name;
     this.job = job;
     this.specialSkill = specialSkill;
+    this.ship = null;
+  }
+  entership(){
     this.ship = ship;
+    this.ship.crew.push(this.name);
   }
 }
 
@@ -26,6 +30,12 @@ class Ship {
     this.crew = [];
   }
 }
+
+const crewMember1 = new CrewMember('Rick Martinez','pilot','chemistry');
+const mav = new Ship('Mars Ascent Vehicle','MAV','Ascend into low orbit');
+
+console.log(mav);
+console.log(crewMember1);
 
 
 
