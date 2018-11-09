@@ -12,6 +12,7 @@ function Checker() {
   // Your code here
 }
 
+
 class Board {
   constructor() {
     this.grid = []
