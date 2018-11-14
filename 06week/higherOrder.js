@@ -2,24 +2,63 @@
 
 const assert = require('assert');
 
-function forEach(arr, callback) {
-  // Your code here
+const forEach=(arr, callback)=>{
+  for (let x=0;x<arr.length;x++){
+    callback(arr[x]);
+  }
 }
 
-function map(arr, callback) {
-  // Your code here
+const forEachAgain=(arr, callback)=>{
+  for (let x=0;x<arr.length;x++){
+    if(arr.hasOwnProperty(x)){
+      callback(arr[x]);
+    }
+  }
 }
 
-function filter(arr, callback) {
-  // Your code here
+const map = (arr, callback)=>{
+  let newArr = [];
+  for(let x=0;x<arr.length;x++){
+    const formattedItem = callback(arr[x]);
+    newArr.push(formattedItem);
+  }
+  return newArr;
 }
 
-function some(arr, callback) {
-  // Your code here
+const filter = (arr, callback)=>{
+  let newArr = [];
+  for(let x=0;x<arr.length;x++){
+    if(callback(arr[x])){
+      newArr.push(arr[x]);
+    }
+  }
+  return newArr;
 }
 
-function every(arr, callback) {
-  // Your code here
+const some=(arr, callback)=>{
+  let trueOrFalse = false;
+  for(let x=0;x<arr.length;x++){
+    if(callback(arr[x])){
+      trueOrFalse=true;
+      if(trueOrFalse){
+        return trueOrFalse;
+      }
+    }
+  }
+  return trueOrFalse;
+}
+
+const every=(arr, callback)=>{
+  let trueOrFalse = true;
+  for(let x=0;x<arr.length;x++){
+    if(!callback(arr[x])){
+      trueOrFalse=false;
+      if(!trueOrFalse){
+        return trueOrFalse;
+      }
+    }
+  }
+  return trueOrFalse;
 }
 
 if (typeof describe === 'function') {
@@ -28,6 +67,16 @@ if (typeof describe === 'function') {
     it('should call the callback the array.length number of times', () => {
       let count = 0;
       forEach([1, 2, 3], () => {
+        count++;
+      });
+      assert.equal(count, 3);
+    });
+  });
+
+  describe('#forEachAgain()', () => {
+    it('should call the callback the array.length number of times', () => {
+      let count = 0;
+      forEachAgain([1, 2, 3], () => {
         count++;
       });
       assert.equal(count, 3);
