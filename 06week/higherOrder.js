@@ -35,8 +35,17 @@ const filter = (arr, callback)=>{
   return newArr;
 }
 
-function some(arr, callback) {
-  // Your code here
+const some=(arr, callback)=>{
+  let trueOrFalse = false;
+  for(let x=0;x<arr.length;x++){
+    if(callback(arr[x])){
+      trueOrFalse=true;
+      if(trueOrFalse == true){
+        return trueOrFalse;
+      }
+    }
+  }
+  return trueOrFalse;
 }
 
 function every(arr, callback) {
