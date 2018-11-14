@@ -6,13 +6,30 @@ function forEach(arr, callback) {
   // Your code here
 }
 
-function map(arr, callback) {
-  // Your code here
+const map = (arr, callback)=>{
+  let newArr = [];
+  for(let x=0;x<arr.length;x++){
+    const formattedItem = callback(arr[x]);
+    newArr.push(formattedItem);
+  }
+  return newArr;
 }
 
-function filter(arr, callback) {
-  // Your code here
+const filter = (arr, callback)=>{
+  let newArr = [];
+  for(let x=0;x<arr.length;x++){
+    if(callback(arr[x])){
+      newArr.push(arr[x]);
+    }
+  }
+  return newArr;
 }
+
+const arrayOfNumbers = [34,67,22,55,9,78,99]
+
+const greaterThanForty = () => filter(arrayOfNumbers,(num)=>{
+  return num>=40 })
+greaterThanForty();
 
 function some(arr, callback) {
   // Your code here
