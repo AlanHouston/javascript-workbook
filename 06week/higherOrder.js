@@ -2,8 +2,18 @@
 
 const assert = require('assert');
 
-function forEach(arr, callback) {
-  // Your code here
+const forEach=(arr, callback)=>{
+  for (let x=0;x<arr.length;x++){
+    callback(arr[x]);
+  }
+}
+
+const forEachAgain=(arr, callback)=>{
+  for (let x=0;x<arr.length;x++){
+    if(arr.hasOwnProperty(x)){
+      callback(arr[x]);
+    }
+  }
 }
 
 const map = (arr, callback)=>{
@@ -39,6 +49,16 @@ if (typeof describe === 'function') {
     it('should call the callback the array.length number of times', () => {
       let count = 0;
       forEach([1, 2, 3], () => {
+        count++;
+      });
+      assert.equal(count, 3);
+    });
+  });
+
+  describe('#forEachAgain()', () => {
+    it('should call the callback the array.length number of times', () => {
+      let count = 0;
+      forEachAgain([1, 2, 3], () => {
         count++;
       });
       assert.equal(count, 3);
