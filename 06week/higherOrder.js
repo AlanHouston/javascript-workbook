@@ -25,12 +25,6 @@ const filter = (arr, callback)=>{
   return newArr;
 }
 
-const arrayOfNumbers = [34,67,22,55,9,78,99]
-
-const greaterThanForty = () => filter(arrayOfNumbers,(num)=>{
-  return num>=40 })
-greaterThanForty();
-
 function some(arr, callback) {
   // Your code here
 }
