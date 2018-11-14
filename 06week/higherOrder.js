@@ -40,7 +40,7 @@ const some=(arr, callback)=>{
   for(let x=0;x<arr.length;x++){
     if(callback(arr[x])){
       trueOrFalse=true;
-      if(trueOrFalse == true){
+      if(trueOrFalse){
         return trueOrFalse;
       }
     }
@@ -48,8 +48,17 @@ const some=(arr, callback)=>{
   return trueOrFalse;
 }
 
-function every(arr, callback) {
-  // Your code here
+const every=(arr, callback)=>{
+  let trueOrFalse = true;
+  for(let x=0;x<arr.length;x++){
+    if(!callback(arr[x])){
+      trueOrFalse=false;
+      if(!trueOrFalse){
+        return trueOrFalse;
+      }
+    }
+  }
+  return trueOrFalse;
 }
 
 if (typeof describe === 'function') {
