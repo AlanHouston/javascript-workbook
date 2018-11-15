@@ -2,12 +2,12 @@ const strNums = ["1","4","1","5","9","2","6","5","3","5","8","9","7","9","3","2"
 
 // Given 1000 digits of PI as strings, return an array of the digits as numbers
 const nums = strNums.map(num=>{
-    return Number(num);
+  return Number(num);
 });
 
 // Find the sum of the even values
 const arrayOfEvenNums = nums.filter(evens=>{
-    return evens %2 == 0;
+  return evens %2 == 0;
 });
 
 const sumReducer = (accumulator, currentValue) => accumulator + currentValue;
@@ -17,7 +17,7 @@ console.log(sumEvens);
 
 // Find the index of the first "Austin" value (the value plus its index equals 512)
 const atxIdx = nums.findIndex((value,index)=>{
-    return value + index == 512;
+  return value + index == 512;
 });
 
 console.log(`index: ${atxIdx}, value: ${nums[atxIdx]}`);
@@ -91,11 +91,14 @@ const weather = [
 
 //using a higher order function, create an array of the unique 'weather_state_name' values of the weather array. Your function should return the following array ['Light Cloud', 'Heavy Cloud', 'Showers']
 
-const weatherStates = weather.map(item => item.weather_state_name).filter((value, index, self) => self.indexOf(value) == index);
+const grabWeatherStates = weather.map(item=>item.weather_state_name);
+const weatherStates = grabWeatherStates.filter((value, index) => grabWeatherStates.indexOf(value)==index);
 
 console.log(weatherStates);
 
 //find the id of the object in weather that has a min_temp of 15.915
 
-// const idealTemp = 
-// console.log(idealTemp)
+const grabMinTemp = weather.map(item => item.min_temp);
+const objWithMinTemp = weather.filter(item=> item.min_temp==15.915);
+const idealTemp = objWithMinTemp.map(item=>item.id);
+console.log(idealTemp)
