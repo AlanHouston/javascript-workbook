@@ -7,13 +7,54 @@ const rl = readline.createInterface({
   output: process.stdout
 });
 
+//check if it's a string of letters, function isString(), function hasOnlyLetters() - if so, turn string into array, .split()
+//if first letter is vowel, return word + 'yay', function findFirstVowel()
+//other wise, find the first vowel, function firstLetterVowel(), return the index of the vowel, letters before vowel become new (var) middle, vowel and everything following become new (var) beginning, slap an 'ay' after those bad boys
+//.join() to bring back to string
 
-function pigLatin(word) {
 
-  // Your code here
-
+const isString = (formattedWord) => {
+  return typeof(formattedWord)=='string';
 }
 
+const hasOnlyLetters=(formattedWord)=>{
+  const letter = 'abcdefghijklmnopqrstuvwxyz';
+  let isLetter = false;
+  for(let n=0;n<formattedWord.length;n++){
+    for(let m=0;m<letter.length;m++){
+      if(formattedWord[n]==letter[m]){
+      isLetter=true;
+      }
+    }
+  }
+  return isLetter;
+}
+
+const firstVowel = (splitWord) =>{
+  const vowel = ['a','e','i','o','u'];
+  for(let x=0;x<splitWord.length;x++){
+    for(let y=0;y<vowel.length;y++){
+      if(splitWord[x] == vowel[y]){
+        return x;
+      }
+    }
+  }
+} 
+
+const pigLatin = (word)=> {
+  const formattedWord = word.trim().toLowerCase();
+  if(isString(formattedWord) && hasOnlyLetters(formattedWord)){
+    const splitWord = formattedWord.split('');
+    const theFirstVowel = firstVowel(splitWord);
+    if(theFirstVowel == 0){
+      return splitWord.join('')+ 'yay';
+    }else {
+      const middle = splitWord.slice(0,theFirstVowel).join('');
+      const beginning = splitWord.slice(theFirstVowel).join('');
+      return beginning + middle + 'ay';
+    }
+  }else return 'Please enter words with letters!'
+}
 
 function getPrompt() {
   rl.question('word ', (answer) => {
